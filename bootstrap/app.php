@@ -9,6 +9,10 @@ return Application::configure(basePath: dirname(__DIR__))
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
+        then: function(){
+            require base_path('app/Modules/Auth/Routes/web.php');
+            require base_path('app/Modules/Auth/Routes/api.php');
+        }
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->api(prepend: [
